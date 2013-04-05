@@ -1,0 +1,22 @@
+[ui]
+username = Katsuaki Ikegami <liquid.amber.ja@gmail.com>
+verbose = True
+editor = vim
+
+[extensions]
+mq =
+color =
+pager =
+graphlog =
+bookmarks =
+transplant =
+
+[bookmarks]
+track.current = True
+
+[alias]
+graph = log -G --pager=yes
+
+[pager]
+pager = less -FRX
+ignore = version, help, update, status

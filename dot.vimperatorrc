@@ -1,0 +1,46 @@
+"2.2 (created: 2009/10/28 19:04:27)
+
+" vim: set ft=vimperator:
+set titlestring=Firefox
+
+" hint with XUL/migemo
+set hintmatching=custom
+
+set complete=slS
+
+nnoremap s :open<Space>google<Space>
+nnoremap S :tabopen<Space>google<Space>
+nnoremap j 5<C-e>
+nnoremap k 5<C-y>
+
+"hatena bookmark
+javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+
+"Next/Prev
+set nextpattern=\bnext\b,\bmore\b,next,^次(の)?ページ,\b次.*,→\b,^>$,^(>>|≫)$,^(>|≫),(>|≫)$
+set previouspattern=\bprev|previous\b,prev,^前(の)?ページ,\b前.*,\b←,^<$,^(<<|≪)$,^(<|≪),(<|≪)$ 
+
+" feedSomeKeys_3.js
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+
+" Common
+lazy fmap -modes=i -events=keydown,keypress <C-b> <Left>
+lazy fmap -modes=i -events=keydown,keypress <C-f> <Right>
+
+" Gmail
+lazy fmaps -u='^https://mail\.google\.com/mail' -events=vkeydown,keypress,vkeyup j k
+lazy fmaps -u='^https://mail\.google\.com/mail' c n p o u x s r a ? gi gs gt gd ga gc gl I
+lazy fmaps -u='^https://mail\.google\.com/mail' -p=<Leader> d,# s,! e
+lazy fmaps -u='^https://mail\.google\.com/mail/.*/[0-9a-f]+$' c j,n k,p n,j p,k o u x s r a ? gi gs gt gd ga gc
+lazy fmaps -u='^https://mail\.google\.com/mail/.*/[0-9a-f]+$' -p=<Leader> d,# s,! e
+
+" Google Reader
+lazy fmaps -u='^https?://www\.google\.(com|co\.jp)/reader' -events=vkeydown,vkeypress j k J K n p N P X O s v gh ga gs gS gu gt gT gd gf gF gc ge gp r u 1 2 / a
+lazy fmaps -u='^https?://www\.google\.(com|co\.jp)/reader' -events=vkeydown,vkeypress,keydown,keypress <Space> <S-Space>
+
+javascript <<EOM
+liberator.globalVariables.multi_requester_mappings = [
+	[',ma', 'alc'],        // <-- :mr alc
+	[',mg', 'goo'],        // <-- :mr goo
+];
+EOM

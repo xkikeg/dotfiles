@@ -1,0 +1,67 @@
+export ALIAS_LOADED=LOADED
+
+grep_exclude_option=''
+case "${OSTYPE}" in
+    linux*)
+	alias ls="ls -F --color"
+	grep_exclude_option='--exclude-dir=.svn'
+	;;
+    freebsd*|darwin*)
+	alias ls="ls -G"
+	;;
+esac
+
+alias grep="grep $grep_exclude_option --color=auto"
+alias fgrep="fgrep $grep_exclude_option --color=auto"
+alias egrep="egrep $grep_exclude_option --color=auto"
+alias grepr='grep -r'
+
+alias less="less -R"
+alias sl="ls"
+alias l="ls"
+alias s="ls"
+alias la="ls -A"
+alias ll="ls -lh"
+alias lla="ls -lhA"
+alias lal="ls -lhA"
+
+alias mv="mv -i"
+alias cp="cp -i"
+
+#Emacs with no window
+alias emacs='emacs -nw'
+
+#gnome open
+alias gopen='gnome-open'
+
+#mozc
+alias mozc-config="/usr/lib/mozc/mozc_tool -mode=config_dialog"
+alias mozc-dict="/usr/lib/mozc/mozc_tool --mode=dictionary_tool"
+
+#gxpc settings
+alias use='gxpc use'
+alias explore='gxpc explore'
+alias e='gxpc e'
+alias mw='gxpc mw'
+alias ep='gxpc ep'
+alias smask='gxpc smask'
+alias rmask='gxpc rmask'
+alias gcount='gxpc count'
+alias gexport='gxpc export'
+alias gcd='gxpc cd'
+alias gquit='gxpc quit;export GXP_SESSION='
+alias gxpstate='gxpc stat'
+alias gxpcs='gxpc --create_session 1 stat'
+alias gxpqs='gxpc quit --session_only'
+alias gpwd='gxpc cd `pwd`'
+alias gping='gxpc ping'
+alias gpasswd='gxpc export SU_PASSWORD=`readne`'
+alias gstat='gxpc stat'
+alias gtrim='gxpc trim'
+alias gexport='gxpc export'
+alias gxpstate='gxpc stat'
+alias gxpcs='gxpc --create_session 1 stat'
+alias gxpqs='gxpc quit --session_only'
+
+# VCS alias
+source $HOME/.alias.vcs

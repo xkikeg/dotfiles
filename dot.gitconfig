@@ -1,0 +1,18 @@
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+	pager = lv
+	editor = vim
+	excludesfile = ~/.gitignore
+[pager]
+	status = off
+[user]
+	name = K. Ikegami
+	email = liquid.amber.ja@gmail.com
+[alias]
+	co = checkout
+	st = status
+	ci = commit
+	graph = log --graph --pretty=oneline --decorate --date=short --abbrev-commit --all

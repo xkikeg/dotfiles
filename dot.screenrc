@@ -1,0 +1,20 @@
+defencoding UTF-8
+escape ^z^z
+startup_message off
+hardstatus on
+hardstatus alwayslastline "%-Lw%{= bw}%50>%n%f* %t%{-}%+Lw%<"
+defwrap on
+
+# Key bind like emacs
+#bind 2 split
+bind o other
+#bind 1 only
+#bind 0 remove
+
+defscrollback 10000
+bufferfile "$HOME/screen_dump"
+
+#nethack on
+
+## invalidate lock
+bind ^x
