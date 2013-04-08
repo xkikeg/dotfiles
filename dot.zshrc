@@ -105,13 +105,19 @@ esac
 
 # Load another config
 check_and_source() {
-	[[ -r $1 ]] && source $1
+	if [[ -r $1 ]]; then
+		source $1
+		return 0
+	else
+		return 1
+	fi
 }
 # Local config
 check_and_source ~/.zshrc.local
 # alias config
 check_and_source ~/.alias
 # autojump
-check_and_source /usr/share/autojump/autojump.zsh
+check_and_source /usr/share/autojump/autojump.zsh \
+ || check_and_source /usr/local/etc/autojump.zsh
 
 return
