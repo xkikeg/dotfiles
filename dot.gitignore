@@ -28,3 +28,8 @@
 # OMakefile
 *.omc
 .omakedb*
+
+# OS specific file
+.DS_Store
+Thumbs.db
+desktop.ini
