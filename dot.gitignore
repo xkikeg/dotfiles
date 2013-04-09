@@ -1,3 +1,4 @@
+# Object files
 *.o
 *.lo
 *.la
@@ -6,8 +7,12 @@
 *.so
 *.so.[0-9]*
 *.a
+
+# Python
 *.pyc
 *.pyo
+
+# LaTeX
 *.dvi
 *.log
 *.aux
@@ -19,5 +24,7 @@
 *.out
 *.bbl
 *.blg
+
+# OMakefile
 *.omc
 .omakedb*
