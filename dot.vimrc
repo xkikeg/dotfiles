@@ -1,6 +1,6 @@
 "タブ幅の設定
-"set tabstop=5
-"set shiftwidth=5
+set tabstop=4
+set shiftwidth=4
 "全角記号でずれないようにする。
 set ambiwidth=double
 "新しい行のインデントを
