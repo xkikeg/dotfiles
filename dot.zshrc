@@ -6,10 +6,31 @@ SAVEHIST=100000
 # Set Emacs key-bind
 bindkey -e
 
+# Load another config
+check_and_source() {
+	if [[ -r $1 ]]; then
+		source $1
+		return 0
+	else
+		return 1
+	fi
+}
+
+# Load autojump
+check_and_source /usr/share/autojump/autojump.zsh
+
+# HomeBrew
+if command -v brew >/dev/null; then
+	brew_prefix=`brew --prefix`
+# Load zsh-completions
+	fpath=($brew_prefix/share/zsh-completions/ $fpath)
+# Load autojump
+	check_and_source $brew_prefix/etc/autojump.zsh
+fi
+
 # completion
 zstyle :compinstall filename '~/.zshrc'
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit -d
 
 # cd only with directory name.
 setopt auto_cd
@@ -103,21 +124,9 @@ case "${OSTYPE}" in
 	;;
 esac
 
-# Load another config
-check_and_source() {
-	if [[ -r $1 ]]; then
-		source $1
-		return 0
-	else
-		return 1
-	fi
-}
 # Local config
 check_and_source ~/.zshrc.local
 # alias config
 check_and_source ~/.alias
-# autojump
-check_and_source /usr/share/autojump/autojump.zsh \
- || check_and_source /usr/local/etc/autojump.zsh
 
 return
