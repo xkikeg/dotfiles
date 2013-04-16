@@ -15,7 +15,7 @@ set incsearch
 
 "空白文字の表示
 set list
-set listchars=tab:>-,trail:_,eol:$
+set listchars=tab:>-,trail:_,eol:↲
 
 "Use UTF-8
 set termencoding=utf-8
