@@ -1,57 +1,100 @@
-;use user site-lisp
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
+;;; -*- mode: emacs-lisp; coding: utf-8-emacs-unix; indent-tabs-mode: nil -*-
 
-;; when and require
-(defmacro req (lib &rest body)
-  `(when (locate-library ,(symbol-name lib))
-     (require ',lib) ,@body))
+;; use user site-lisp
+(unless (boundp 'user-emacs-directory)
+  (defvar user-emacs-directory (expand-file-name "~/.emacs.d/")))
 
-;enable font-lock
-(when(fboundp 'global-font-lock-mode)(global-font-lock-mode t))
-(setq font-lock-maximum-decoration t)
+;; 受け取った引数をPATHに追加するもの
+(defun add-to-load-path (&rest paths)
+  (let (path)
+    (dolist (path paths paths)
+      (let ((default-directory
+              (expand-file-name (concat user-emacs-directory path))))
+        (add-to-list 'load-path default-directory)
+        (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+            (normal-top-level-add-subdirs-to-load-path))))))
 
-;use UTF-8
-;(if (= emacs-major-version 21)
-;    (require 'un-define))
-(coding-system-put 'utf-8 'category 'utf-8)
-(set-language-info "Japanese" 'coding-priority(cons 'utf-8(get-language-info "Japanese" 'coding-priority)))
-(set-language-environment "Japanese")
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-buffer-file-coding-system 'utf-8)
-(setq default-buffer-file-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
+;; Emacs Lisp のPathを通す
+(add-to-load-path "lisp"
+                  ;; 変更したり、自作の Emacs Lisp
+                  "local-lisp"
+                  ;; private 内には自分専用の物がはいっている
+                  ;; 依存は private 内で完結するようにしている
+                  "private"
+                  ;; 初期設定ファイル
+                  "site-start.d")
 
-;use UTF-8
-(add-hook 'shell-mode-hook(lambda()(set-buffer-process-coding-system 'utf-8 'utf-8)))
+;; Emacs の種類バージョンを判別するための変数を定義
+;; @see http://github.com/elim/dotemacs/blob/master/init.el
+(defun x->bool (elt) (not (not elt)))
+(defvar emacs22-p (equal emacs-major-version 22))
+(defvar emacs23-p (equal emacs-major-version 23))
+(defvar emacs24-p (equal emacs-major-version 24))
+(defvar darwin-p (eq system-type 'darwin))
+(defvar ns-p (featurep 'ns))
+(defvar carbon-p (and (eq window-system 'mac) emacs22-p))
+(defvar mac-p (and (eq window-system 'mac) (or emacs23-p emacs24-p)))
+(defvar linux-p (eq system-type 'gnu/linux))
+(defvar colinux-p (when linux-p
+                    (let ((file "/proc/modules"))
+                      (and
+                       (file-readable-p file)
+                       (x->bool
+                        (with-temp-buffer
+                          (insert-file-contents file)
+                          (goto-char (point-min))
+                          (re-search-forward "^cofuse\.+" nil t)))))))
+(defvar cygwin-p (eq system-type 'cygwin))
+(defvar nt-p (eq system-type 'windows-nt))
+(defvar meadow-p (featurep 'meadow))
+(defvar windows-p (or cygwin-p nt-p meadow-p))
 
-; 括弧の対応
-(show-paren-mode t)
+;; 文字コード
+;;(set-language-environment 'Japanese)
+(set-language-environment  'utf-8)
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8-unix)
+;; 極力UTF-8とする
+(cond
+ (mac-p
+  ;; Mac OS X の HFS+ ファイルフォーマットではファイル名は NFD (の様な物)で扱う
+  ;; 以下はファイル名を NFC で扱う環境と共同作業等する場合の対処
+  (require 'ucs-normalize)
+  (setq file-name-coding-system 'utf-8-hfs)
+  (setq locale-coding-system 'utf-8-hfs))
+ (windows-p
+  (setq file-name-coding-system 'sjis)
+  (setq locale-coding-system 'utf-8))
+ (t
+  (setq file-name-coding-system 'utf-8)
+  (setq locale-coding-system 'utf-8)))
 
-; highlight selected region
-(transient-mark-mode t)
+;; ;enable font-lock
+;; (when(fboundp 'global-font-lock-mode)(global-font-lock-mode t))
+;; (setq font-lock-maximum-decoration t)
 
-; set tab number
-(setq-default tab-width 4)
+;; 全環境で有効な設定
+(require 'init_global)
 
-; Use space instead of tab
-(setq-default indent-tabs-mode nil)
+;; 環境依存設定
+(cond
+ (mac-p (require 'init_mac))
+ )
 
-;use bash
-(setq explicit-shell-file-name "/bin/bash") 
-(setq shell-file-name "/bin/bash")
-(setq shell-command-switch "-c")
+;; 各種設定の起点
+(require 'init_main)
 
-;;; Set C-h As Backspace
-(global-set-key "\C-h" 'delete-backward-char)
-
-;hide inputting password
-(add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
-
-;handle escape sequences
-(autoload 'ansi-color-for-comint-mode-on "ansi-color"
-          "Set `ansi-color-for-comint-mode' to t." t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;; 終了時バイトコンパイル
+(add-hook 'kill-emacs-query-functions
+          (lambda ()
+            (if (file-newer-than-file-p
+                 (expand-file-name "init.el" user-emacs-directory)
+                 (expand-file-name "init.elc" user-emacs-directory))
+                (byte-compile-file
+                 (expand-file-name "init.el" user-emacs-directory) 0))
+            (byte-recompile-directory
+             (expand-file-name "site-start.d" user-emacs-directory) 0)
+            ))
 
 ;;; unset prefix preserve: default is now C-c C-t hoge
 ;(setq YaTeX-inhibit-prefix-letter nil)
