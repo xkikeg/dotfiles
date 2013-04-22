@@ -1,6 +1,6 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-emacs-unix; indent-tabs-mode: nil -*-
 
-;;; BEGIN OF init_mac.el
+;;; BEGIN OF init_darwin.el
 
 ;; PATHの設定、下ほど優先される
 (dolist (dir (list
@@ -22,6 +22,6 @@
 ;; Use GHC instead of Hugs in haskell-mode
 (setq haskell-program-name (executable-find "ghci"))
 
-(provide 'init_mac)
+(provide 'init_darwin)
 
-;;; END OF init_mac.el
+;;; END OF init_darwin.el

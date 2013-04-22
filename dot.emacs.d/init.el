@@ -56,7 +56,7 @@
 (set-default-coding-systems 'utf-8-unix)
 ;; 極力UTF-8とする
 (cond
- (mac-p
+ (darwin-p
   ;; Mac OS X の HFS+ ファイルフォーマットではファイル名は NFD (の様な物)で扱う
   ;; 以下はファイル名を NFC で扱う環境と共同作業等する場合の対処
   (require 'ucs-normalize)
@@ -78,7 +78,7 @@
 
 ;; 環境依存設定
 (cond
- (mac-p (require 'init_mac))
+ (darwin-p (require 'init_darwin))
  )
 
 ;; 各種設定の起点
