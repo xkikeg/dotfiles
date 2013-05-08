@@ -9,8 +9,10 @@
 #umask 022
 
 # set path
-export PATH=$HOME/local/bin:$PATH
-export PATH=$PATH:/var/lib/gems/1.8/bin
+PATH=$PATH:/var/lib/gems/1.8/bin
+PATH=$HOME/.cabal/bin:$PATH
+PATH=$HOME/local/bin:$PATH
+export PATH
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
