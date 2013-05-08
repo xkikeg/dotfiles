@@ -2,6 +2,8 @@
 
 ;;; BEGIN OF init_main.el
 
+(require 'init_flymake)
+
 (provide 'init_main)
 
 ;;; END OF init_main.el
