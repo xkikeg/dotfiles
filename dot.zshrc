@@ -30,7 +30,8 @@ fi
 
 # completion
 zstyle :compinstall filename '~/.zshrc'
-autoload -Uz compinit && compinit -d
+autoload -Uz compinit
+compinit
 
 # cd only with directory name.
 setopt auto_cd
