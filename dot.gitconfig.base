@@ -8,9 +8,6 @@
 	excludesfile = ~/.gitignore
 [pager]
 	status = off
-[user]
-	name = K. Ikegami
-	email = liquid.amber.ja@gmail.com
 [alias]
 	co = checkout
 	st = status
