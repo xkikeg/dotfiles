@@ -13,6 +13,8 @@ syntax on
 set number
 "インクリメンタル検索を有効にする
 set incsearch
+"modelineを有効にする
+set modeline
 
 "空白文字の表示
 set list
