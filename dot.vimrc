@@ -11,6 +11,7 @@ set browsedir=buffer
 syntax on
 "行番号の表示
 set number
+"インクリメンタル検索を有効にする
 set incsearch
 
 "空白文字の表示
