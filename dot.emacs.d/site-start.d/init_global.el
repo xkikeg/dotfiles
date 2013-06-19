@@ -35,6 +35,16 @@
   `(when (locate-library ,(symbol-name lib))
      (require ',lib) ,@body))
 
+;; packageが利用できる場合リポジトリを追加しておく
+(req package
+     (add-to-list
+      'package-archives
+      '("melpa" . "http://melpa.milkbox.net/packages/") t)
+     (add-to-list
+      'package-archives
+      '("marmalade" . "http://marmalade-repo.org/packages/"))
+     (package-initialize))
+
 (provide 'init_global)
 
 ;;; END OF init_global.el

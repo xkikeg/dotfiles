@@ -192,10 +192,6 @@
 (autoload 'imath "imath" "Interactive Math mode" t)
 (autoload 'imath-mode "imath" "Interactive Math mode" t)
 
-; using graph-viz-mode
-(load "graphviz-dot-mode.el")
-(add-hook 'graphviz-dot-mode-hook (lambda () (local-set-key [f5] "\C-x\C-s\C-cc\C-m\C-cp")))
-
 ; Use C/Migemo
 (setq migemo-command "cmigemo")
 (setq migemo-options '("-q" "--emacs"))
