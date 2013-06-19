@@ -42,7 +42,7 @@
 ;; C++
 (defun flymake-cc-init ()
   (flymake-simple-make-or-generic-init
-   "g++" '("-Wall" "-Wextra" "-pedantic" "-fsyntax-only" "$CPPFLAGS")))
+   "g++" '("-std=c++11" "-Wall" "-Wextra" "-pedantic" "-fsyntax-only" "$CPPFLAGS")))
 
 (setq char_set "UTF-8")
 (setq classpath
