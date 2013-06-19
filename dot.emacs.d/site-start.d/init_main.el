@@ -4,6 +4,8 @@
 
 (require 'init_flymake)
 
+(require 'init_yatex)
+
 (provide 'init_main)
 
 ;;; END OF init_main.el
