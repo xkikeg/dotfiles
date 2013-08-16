@@ -2,6 +2,8 @@
 
 ;;; BEGIN OF init_main.el
 
+(require 'init_coffee)
+
 (require 'init_flymake)
 
 (require 'init_yatex)
