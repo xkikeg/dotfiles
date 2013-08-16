@@ -43,7 +43,43 @@
      (add-to-list
       'package-archives
       '("marmalade" . "http://marmalade-repo.org/packages/"))
-     (package-initialize))
+     (package-initialize)
+     ;; Installed packages list
+     (defvar my/packages
+       '(caml
+         coffee-mode
+         graphviz-dot-mode
+         markdown-mode
+         markdown-mode+
+         tuareg
+         )
+       "A list of packages to install from MELPA/marmalade at launch.")
+     ;; Install Melpa packages
+     (dolist (package my/packages)
+       (when (or (not (package-installed-p package)))
+         (package-install package)))
+     )
+
+;; el-get
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(el-get 'sync)
+
+;; Do not create backup file in Dropbox dir.
+(let ((dropbox-directory (expand-file-name "~/Dropbox/"))
+      (destination-directory temporary-file-directory))
+  (add-to-list 'auto-save-file-name-transforms
+               `(,(concat dropbox-directory "\\([^/]*/\\)*\\([^/]*\\)$")
+                 ,(concat destination-directory "\\2") t))
+  (add-to-list 'backup-directory-alist
+               `(,dropbox-directory . ,destination-directory)))
 
 (provide 'init_global)
 

@@ -133,26 +133,23 @@
 (autoload 'imath "imath" "Interactive Math mode" t)
 (autoload 'imath-mode "imath" "Interactive Math mode" t)
 
-; Use C/Migemo
-(setq migemo-command "cmigemo")
+;; Use C/Migemo
 (setq migemo-options '("-q" "--emacs"))
-(setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
 (setq migemo-regex-dictionary nil)
 (setq migemo-user-dictionary nil)
 (setq migemo-coding-system 'utf-8-unix)
+(cond
+ (darwin-p
+  (setq migemo-command "/usr/local/bin/cmigemo")
+  (setq migemo-dictionary
+        "/usr/local/Cellar/cmigemo/20110227/share/migemo/utf-8/migemo-dict"))
+ (t
+  (setq migemo-command "cmigemo")
+  (setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")))
 (if (condition-case nil
 	(require 'migemo)
       (file-error))
     (migemo-init))
-
-;; Do not create backup file in Dropbox dir.
-(let ((dropbox-directory (expand-file-name "~/Dropbox/"))
-      (destination-directory temporary-file-directory))
-  (add-to-list 'auto-save-file-name-transforms
-               `(,(concat dropbox-directory "\\([^/]*/\\)*\\([^/]*\\)$")
-                 ,(concat destination-directory "\\2") t))
-  (add-to-list 'backup-directory-alist
-               `(,dropbox-directory . ,destination-directory)))
 
 ;; OCaml
 (setq auto-mode-alist (cons '("\.ml\w?" . tuareg-mode) auto-mode-alist))
@@ -172,14 +169,3 @@
 (global-set-key "\C-cew" 'evernote-write-note)
 (global-set-key "\C-cep" 'evernote-post-region)
 (global-set-key "\C-ceb" 'evernote-browser)
-
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(el-get 'sync)
