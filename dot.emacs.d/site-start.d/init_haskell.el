@@ -1,7 +1,11 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-emacs-unix; indent-tabs-mode: nil -*-
 
-;;; BEGIN OF init_main.el
+;;; BEGIN OF init_haskell.el
 
-(provide 'init_main)
+(custom-set-variables
+ '(haskell-process-type 'cabal-dev)
+)
 
-;;; END OF init_main.el
+(provide 'init_haskell)
+
+;;; END OF init_haskell.el

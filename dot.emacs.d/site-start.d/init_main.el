@@ -2,9 +2,21 @@
 
 ;;; BEGIN OF init_main.el
 
+(require 'init_c_and_cxx)
+
+; (require 'init_chapel)
+
 (require 'init_coffee)
 
+(require 'init_flex_bison)
+
 (require 'init_flymake)
+
+(require 'init_haskell)
+
+; (require 'init_imaxima)
+
+(require 'init_migemo)
 
 (require 'init_yatex)
 

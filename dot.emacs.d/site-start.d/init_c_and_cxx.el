@@ -24,6 +24,14 @@
       (append '(("\\.inl$" . c++-mode))
               auto-mode-alist))
 
+;; valgrind code
+(add-hook 'find-file-hook
+          (lambda ()
+            (when (string-match-p ".*/valgrind/.*" (concat buffer-file-name) 0)
+              (make-local-variable 'c-basic-offset)
+              (setq c-basic-offset 3))
+            ))
+
 (provide 'init_c_and_cxx)
 
 ;;; END OF init_c_and_cxx.el

@@ -84,6 +84,12 @@
 ;; 各種設定の起点
 (require 'init_main)
 
+;; custom-file
+(setq custom-file
+      (expand-file-name "private/customize.el" user-emacs-directory))
+
+(req private)
+
 ;; 終了時バイトコンパイル
 (add-hook 'kill-emacs-query-functions
           (lambda ()
@@ -96,76 +102,4 @@
              (expand-file-name "site-start.d" user-emacs-directory) 0)
             ))
 
-; Cilk
-; cilk files also included in c++-mode
-(setq auto-mode-alist
-      (append '(("\\.cilkh$" . c++-mode))
-              auto-mode-alist))
-(setq auto-mode-alist
-      (append '(("\\.cilk$" . c++-mode))
-              auto-mode-alist))
-
-; using chpl-mode for Chapel
-(setq chpl-home (getenv "CHPL_HOME"))
-; make sure that when chpl-mode is entered, (our modified) cc-mode is
-; loaded
-(autoload 'chpl-mode "chpl-mode" "Chpl enhanced cc-mode" t)
-; make loading files with a .chpl extension put emacs into chpl-mode
-(add-to-list 'auto-mode-alist '("\\.chpl$" . chpl-mode))
-(add-hook 'chpl-mode-hook
-          '(lambda ()
-             (setq c-basic-offset 4)
-             (setq tab-width c-basic-offset)
-             (setq indent-tabs-mode t)))
-
-;; package specific config
-
-;; valgrind code
-(add-hook 'find-file-hook
-          (lambda ()
-            (when (string-match-p ".*/valgrind/.*" (concat buffer-file-name) 0)
-              (make-local-variable 'c-basic-offset)
-              (setq c-basic-offset 3))
-            ))
-
-; imaxima
-(autoload 'imaxima "imaxima" "Frontend of Maxima CAS" t)
-(autoload 'imath "imath" "Interactive Math mode" t)
-(autoload 'imath-mode "imath" "Interactive Math mode" t)
-
-;; Use C/Migemo
-(setq migemo-options '("-q" "--emacs"))
-(setq migemo-regex-dictionary nil)
-(setq migemo-user-dictionary nil)
-(setq migemo-coding-system 'utf-8-unix)
-(cond
- (darwin-p
-  (setq migemo-command "/usr/local/bin/cmigemo")
-  (setq migemo-dictionary
-        "/usr/local/Cellar/cmigemo/20110227/share/migemo/utf-8/migemo-dict"))
- (t
-  (setq migemo-command "cmigemo")
-  (setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")))
-(if (condition-case nil
-	(require 'migemo)
-      (file-error))
-    (migemo-init))
-
-;; OCaml
-(setq auto-mode-alist (cons '("\.ml\w?" . tuareg-mode) auto-mode-alist))
-(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
-(autoload 'tuareg-run-caml "tuareg" "startup a Caml toplevel" t)
-(autoload 'camldebug "camldebug" "Run the Caml debugger" t)
-
-;; Evernote
-(req epa-setup)
-(req evernote-mode)
-(setq evernote-username "liquid_amber")
-(setq evernote-enml-formatter-command '("w3m" "-dump" "-I" "UTF8" "-O" "UTF8"))
-(global-set-key "\C-cec" 'evernote-create-note)
-(global-set-key "\C-ceo" 'evernote-open-note)
-(global-set-key "\C-ces" 'evernote-search-notes)
-(global-set-key "\C-ceS" 'evernote-do-saved-search)
-(global-set-key "\C-cew" 'evernote-write-note)
-(global-set-key "\C-cep" 'evernote-post-region)
-(global-set-key "\C-ceb" 'evernote-browser)
+;; END OF init.el

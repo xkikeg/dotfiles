@@ -51,6 +51,7 @@
          graphviz-dot-mode
          markdown-mode
          markdown-mode+
+         migemo
          tuareg
          )
        "A list of packages to install from MELPA/marmalade at launch.")
