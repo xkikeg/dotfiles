@@ -128,9 +128,9 @@ case "${OSTYPE}" in
 	;;
 esac
 
-# Local config
-check_and_source ~/.zshrc.local
 # alias config
 check_and_source ~/.alias
+# Local config
+check_and_source ~/.zshrc.local
 
 return
