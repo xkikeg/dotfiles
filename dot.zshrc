@@ -1,3 +1,6 @@
+#!/usr/local/bin/zsh -f
+# -*- shell-script -*-
+
 # Config history
 HISTFILE=~/.zsh_history
 HISTSIZE=100000

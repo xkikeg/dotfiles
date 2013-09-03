@@ -1,3 +1,5 @@
+# -*- shell-script -*-
+
 export ALIAS_LOADED=LOADED
 
 grep_exclude_option=''
