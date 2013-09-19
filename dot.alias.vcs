@@ -1,26 +1,37 @@
 # -*- shell-script -*-
 # Git aliases by hayamiz
 
-alias status='trygitcmd status'
-alias st='trygitcmd status'
-alias push='trygitcmd push'
-alias pull='trygitcmd pull'
-alias commit='trygitcmd commit'
-alias ci='trygitcmd commit'
-alias diff='trygitcmd diff'
-alias branch='trygitcmd branch'
-alias br='trygitcmd branch'
-alias checkout='trygitcmd checkout'
-alias co='trygitcmd checkout'
-alias log='trygitcmd log'
+alias status='tryvcscmd status'
+alias st='tryvcscmd -g "-s" status'
+alias push='tryvcscmd push'
+alias pull='tryvcscmd pull'
+alias commit='tryvcscmd -g "-v" commit'
+alias ci='tryvcscmd -g "-v" commit'
+alias diff='tryvcscmd diff'
+alias branch='tryvcscmd branch'
+alias br='tryvcscmd branch'
+alias checkout='tryvcscmd checkout'
+alias co='tryvcscmd checkout'
+alias log='tryvcscmd log'
 
-function trygitcmd(){
+function tryvcscmd(){
+    opt_git=""
+    opt_svn=""
+    opt_hg=""
+    while getopts 'g:s:h:' flag; do
+        case $flag in
+            g) opt_git="$OPTARG";;
+            s) opt_svn="$OPTARG";;
+            h) opt_hg="$OPTARG";;
+        esac
+    done
+    shift $((${OPTIND} - 1))
     if {which git > /dev/null} && {git branch > /dev/null 2>&1}; then
-        command git "$@"
+        command git "$@" $opt_git
     elif {which svn > /dev/null} && {svn info > /dev/null 2>&1}; then
-        command svn "$@"
+        command svn "$@" $opt_svn
     elif {which hg > /dev/null} && {hg status > /dev/null 2>&1}; then
-        command hg "$@"
+        command hg "$@" $opt_hg
     else
         command "$@"
     fi
