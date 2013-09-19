@@ -5,15 +5,6 @@
 (require 'flymake)
 
 
-(defun flymake-get-make-cmdline (source base-dir)
-  "redefinition to remove 'check-syntax' target"
-  (list "make"
-        (list "-s" "-C"
-              base-dir
-              (concat "CHK_SOURCES=" source)
-              "SYNTAX_CHECK_MODE=1"
-              )))
-
 (defun flymake-simple-make-or-generic-init (cmd &optional opts)
   "force to check syntax of C/C++ without Makefile"
   (if (file-exists-p "Makefile")
