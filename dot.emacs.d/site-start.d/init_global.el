@@ -52,7 +52,9 @@
          markdown-mode
          markdown-mode+
          migemo
+         haskell-mode
          tuareg
+         yaml-mode
          )
        "A list of packages to install from MELPA/marmalade at launch.")
      ;; Install Melpa packages
