@@ -11,6 +11,9 @@
 ;; ファイル末尾の改行を強制
 (setq require-final-newline t)
 
+;; 行末の空白を表示
+(setq-default show-trailing-whitespace t)
+
 ;; タブを4文字に設定
 (setq-default tab-width 4)
 
