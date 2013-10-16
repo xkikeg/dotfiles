@@ -8,6 +8,9 @@
 ;; リージョン設定時にハイライトされる設定
 (transient-mark-mode t)
 
+;; ファイル末尾の改行を強制
+(setq require-final-newline t)
+
 ;; タブを4文字に設定
 (setq-default tab-width 4)
 
