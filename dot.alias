@@ -5,13 +5,29 @@ export ALIAS_LOADED=LOADED
 grep_exclude_option=''
 case "${OSTYPE}" in
     linux*)
-	alias ls="ls -F --color"
-	grep_exclude_option='--exclude-dir=.svn'
-	;;
-    freebsd*|darwin*)
-	alias ls="ls -G"
-	;;
+        is_linux="1"
+        ;;
+    freebsd*)
+        is_bsd="1"
+        ;;
+    darwin*)
+        is_bsd="1"
+        is_mac="1"
+        ;;
 esac
+
+if [[ -n "$is_linux" ]]; then
+    alias ls="ls -F --color"
+    grep_exclude_option='--exclude-dir=.svn'
+elif [[ -n "$is_bsd" ]]; then
+    alias ls="ls -G"
+fi
+
+if [[ -n "$is_mac" ]]; then
+    alias o="open"
+else
+    alias o="gopen"
+fi
 
 alias grep="grep $grep_exclude_option --color=auto"
 alias fgrep="fgrep $grep_exclude_option --color=auto"
