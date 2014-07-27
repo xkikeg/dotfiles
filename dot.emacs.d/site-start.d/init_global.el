@@ -61,6 +61,7 @@
          haskell-mode
          tuareg
          yaml-mode
+         rust-mode
          )
        "A list of packages to install from MELPA/marmalade at launch.")
      ;; Install Melpa packages
