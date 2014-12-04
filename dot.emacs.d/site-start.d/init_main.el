@@ -16,6 +16,8 @@
 
 ; (require 'init_imaxima)
 
+(require 'init_javascript)
+
 (require 'init_migemo)
 
 (require 'init_yatex)
