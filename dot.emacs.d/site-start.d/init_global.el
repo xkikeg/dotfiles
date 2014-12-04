@@ -59,6 +59,7 @@
          markdown-mode+
          migemo
          haskell-mode
+         purescript-mode
          tuareg
          yaml-mode
          rust-mode
