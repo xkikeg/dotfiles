@@ -12,6 +12,7 @@
 
 # set path
 PATH=$PATH:/var/lib/gems/1.8/bin
+PATH=$PATH:$HOME/.nodebrew/current/bin
 PATH=$HOME/.cabal/bin:$PATH
 PATH=$HOME/local/bin:$PATH
 export PATH
