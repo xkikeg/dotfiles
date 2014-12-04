@@ -41,7 +41,6 @@
        "rotatebox" "scalebox" "resizebox" "reflectbox"))
 ))
 ;; use YaTeX for hoge.tex file.
-(req yatex)
 (setq auto-mode-alist
       (cons (cons "\\.tex$" 'yatex-mode) auto-mode-alist))
 

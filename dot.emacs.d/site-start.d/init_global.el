@@ -41,6 +41,9 @@
   `(when (locate-library ,(symbol-name lib))
      (require ',lib) ,@body))
 
+;; Don't ask when following vcs symlink
+(setq vc-follow-symlinks t)
+
 ;; packageが利用できる場合リポジトリを追加しておく
 (req package
      (add-to-list
