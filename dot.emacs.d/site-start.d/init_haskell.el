@@ -4,7 +4,20 @@
 
 (custom-set-variables
  '(haskell-process-type 'cabal-dev)
-)
+ )
+
+(autoload 'offside-trap-mode "offside-trap.el")
+
+(add-hook
+ 'haskell-mode-hook
+ '(lambda ()
+
+    (turn-on-haskell-indentation)
+    ; (turn-on-haskell-indent)
+
+    (offside-trap-mode)
+    ))
+
 
 (provide 'init_haskell)
 
