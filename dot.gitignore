@@ -1,6 +1,10 @@
 # backup files
 *~
 
+# Globally ignored file
+/,*
+/,/
+
 # Object files
 *.o
 *.lo
