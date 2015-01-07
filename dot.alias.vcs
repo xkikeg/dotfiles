@@ -26,11 +26,11 @@ function tryvcscmd(){
         esac
     done
     shift $((${OPTIND} - 1))
-    if {which git > /dev/null} && {git branch > /dev/null 2>&1}; then
+    if {which git > /dev/null 2>&1} && {git branch > /dev/null 2>&1}; then
         command git "$@" $opt_git
-    elif {which svn > /dev/null} && {svn info > /dev/null 2>&1}; then
+    elif {which svn > /dev/null 2>&1} && {svn info > /dev/null 2>&1}; then
         command svn "$@" $opt_svn
-    elif {which hg > /dev/null} && {hg status > /dev/null 2>&1}; then
+    elif {which hg > /dev/null 2>&1} && {hg status > /dev/null 2>&1}; then
         command hg "$@" $opt_hg
     else
         command "$@"
