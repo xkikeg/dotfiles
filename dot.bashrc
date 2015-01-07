@@ -105,3 +105,5 @@ if [[ -x /usr/bin/dircolors ]]; then
 fi
 
 return
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

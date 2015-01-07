@@ -134,3 +134,5 @@ check_and_source ~/.alias
 check_and_source ~/.zshrc.local
 
 return
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
