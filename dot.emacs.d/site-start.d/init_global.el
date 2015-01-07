@@ -66,6 +66,7 @@
          tuareg
          yaml-mode
          rust-mode
+         rnc-mode
          )
        "A list of packages to install from MELPA/marmalade at launch.")
      ;; Install Melpa packages
