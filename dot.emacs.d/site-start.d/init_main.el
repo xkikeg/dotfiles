@@ -20,6 +20,8 @@
 
 (require 'init_migemo)
 
+(require 'init_purescript)
+
 (require 'init_yatex)
 
 (provide 'init_main)
