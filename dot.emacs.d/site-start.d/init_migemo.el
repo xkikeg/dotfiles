@@ -11,12 +11,12 @@
  (darwin-p
   (setq migemo-command "/usr/local/bin/cmigemo")
   (setq migemo-dictionary
-        "/usr/local/Cellar/cmigemo/20110227/share/migemo/utf-8/migemo-dict"))
+        "/usr/local/share/migemo/utf-8/migemo-dict"))
  (t
   (setq migemo-command "cmigemo")
   (setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")))
 (if (condition-case nil
-	(require 'migemo)
+        (require 'migemo)
       (file-error))
     (migemo-init))
 
