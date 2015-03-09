@@ -28,7 +28,7 @@ if command -v brew >/dev/null; then
 # Load zsh-completions
 	fpath=($brew_prefix/share/zsh-completions/ $fpath)
 # Load autojump
-	check_and_source $brew_prefix/etc/autojump.zsh
+	check_and_source $brew_prefix/etc/profile.d/autojump.sh
 fi
 
 # completion
