@@ -44,48 +44,27 @@
 ;; Don't ask when following vcs symlink
 (setq vc-follow-symlinks t)
 
-;; packageが利用できる場合リポジトリを追加しておく
-(req package
-     (add-to-list
-      'package-archives
-      '("melpa" . "http://melpa.milkbox.net/packages/") t)
-     (add-to-list
-      'package-archives
-      '("marmalade" . "http://marmalade-repo.org/packages/"))
-     (package-initialize)
-     ;; Installed packages list
-     (defvar my/packages
-       '(caml
-         coffee-mode
-         graphviz-dot-mode
-         markdown-mode
-         markdown-mode+
-         migemo
-         haskell-mode
-         purescript-mode
-         tuareg
-         yaml-mode
-         rust-mode
-         rnc-mode
-         )
-       "A list of packages to install from MELPA/marmalade at launch.")
-     ;; Install Melpa packages
-     (dolist (package my/packages)
-       (when (or (not (package-installed-p package)))
-         (package-install package)))
-     )
+;; use-packageだけを使えるようにして
+;; ほかはすべてuse-packageに依存
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-;; el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+;; ;; el-get
+;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
+;; (unless (require 'el-get nil 'noerror)
+;;   (with-current-buffer
+;;       (url-retrieve-synchronously
+;;        "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+;;     (goto-char (point-max))
+;;     (eval-print-last-sexp)))
 
-(el-get 'sync)
+;; (el-get 'sync)
 
 ;; Do not create backup file in Dropbox dir.
 (let ((dropbox-directory (expand-file-name "~/Dropbox/"))
