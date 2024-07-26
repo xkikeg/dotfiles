@@ -17,7 +17,7 @@
 (use-package cargo
   :ensure t
   :hook (rust-mode . cargo-minor-mode)
-  :init (setq cargo-process--command-check "check --all"))
+  :init (setq cargo-process--command-check "check --workspace --all-targets --all-features"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; #lsp
