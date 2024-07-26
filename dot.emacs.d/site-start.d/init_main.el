@@ -18,6 +18,8 @@
 
 (require 'init_rust)
 
+(require 'init_yaml)
+
 (require 'init_yatex)
 
 (provide 'init_main)
