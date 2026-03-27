@@ -8,6 +8,8 @@
 
 ; (require 'init_flymake)
 
+(require 'init_format)
+
 ; (require 'init_haskell)
 
 ; (require 'init_imaxima)
