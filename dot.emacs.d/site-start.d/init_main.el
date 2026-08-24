@@ -4,6 +4,8 @@
 
 (require 'init_c_and_cxx)
 
+(require 'init_csv)
+
 (require 'init_flex_bison)
 
 ; (require 'init_flymake)
