@@ -8,15 +8,17 @@
 
 (require 'init_flex_bison)
 
-; (require 'init_flymake)
+;; (require 'init_flymake)
 
 (require 'init_format)
 
-; (require 'init_haskell)
+;; (require 'init_haskell)
 
-; (require 'init_imaxima)
+;; (require 'init_imaxima)
 
 (require 'init_javascript)
+
+(require 'init_ledger)
 
 (require 'init_migemo)
 
