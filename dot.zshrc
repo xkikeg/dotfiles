@@ -11,8 +11,8 @@ bindkey -e
 
 # Load another config
 check_and_source() {
-	if [[ -r $1 ]]; then
-		source $1
+	if [[ -r "$1" ]]; then
+		source "$1"
 		return 0
 	else
 		return 1
@@ -66,6 +66,8 @@ setopt prompt_subst
 setopt prompt_percent
 # Print rprompt only on the current commandline.
 setopt transient_rprompt
+# Split words for convenience
+setopt shwordsplit
 
 autoload colors
 colors

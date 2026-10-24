@@ -91,3 +91,6 @@ esac
 
 # VCS alias
 source $HOME/.alias.vcs
+
+# Load local alias if available
+check_and_source $HOME/.alias.local
